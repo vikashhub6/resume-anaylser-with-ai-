@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <<<<<<< HEAD:interview-ai-yt1/Backend/package.json
 {
   "name": "yt-genai",
@@ -28,6 +29,8 @@
   }
 }
 =======
+=======
+>>>>>>> d4f8b9ef35f6d0ab732b450a2a0e4c4f4b3dec04
 {
   "name": "yt-genai",
   "version": "1.0.0",
@@ -52,8 +55,15 @@
     "multer": "^2.0.2",
     "pdf-parse-fork": "^1.2.0",
     "puppeteer": "^24.37.5",
+<<<<<<< HEAD
+=======
+    "unpdf": "^1.4.0",
+>>>>>>> d4f8b9ef35f6d0ab732b450a2a0e4c4f4b3dec04
     "zod": "^3.25.76",
     "zod-to-json-schema": "^3.25.1"
   }
 }
+<<<<<<< HEAD
 >>>>>>> 966552f (fixed pdf library for vercel):Backend/package.json
+=======
+>>>>>>> d4f8b9ef35f6d0ab732b450a2a0e4c4f4b3dec04

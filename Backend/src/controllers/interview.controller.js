@@ -1,5 +1,9 @@
+<<<<<<< HEAD
 <<<<<<< HEAD:interview-ai-yt1/Backend/src/controllers/interview.controller.js
 const pdfParse = require("pdf-parse")
+=======
+const { extractText } = require("unpdf")
+>>>>>>> d4f8b9ef35f6d0ab732b450a2a0e4c4f4b3dec04
 const { generateInterviewReport, generateResumePdf } = require("../services/ai.service")
 const interviewReportModel = require("../models/interviewReport.model")
 
@@ -11,7 +15,13 @@ const interviewReportModel = require("../models/interviewReport.model")
  */
 async function generateInterViewReportController(req, res) {
 
+<<<<<<< HEAD
     const resumeContent = await (new pdfParse.PDFParse(Uint8Array.from(req.file.buffer))).getText()
+=======
+    // Is line ko maine fork ke function-based syntax ke liye fix kiya hai
+  const { text } = await extractText(new Uint8Array(req.file.buffer))
+  const resumeContent = { text }
+>>>>>>> d4f8b9ef35f6d0ab732b450a2a0e4c4f4b3dec04
     const { selfDescription, jobDescription } = req.body
 
     const interViewReportByAi = await generateInterviewReport({
@@ -57,8 +67,12 @@ async function getInterviewReportByIdController(req, res) {
 }
 
 
+<<<<<<< HEAD
 /** 
  * @description Controller to get all interview reports of logged in user.
+=======
+/** * @description Controller to get all interview reports of logged in user.
+>>>>>>> d4f8b9ef35f6d0ab732b450a2a0e4c4f4b3dec04
  */
 async function getAllInterviewReportsController(req, res) {
     const interviewReports = await interviewReportModel.find({ user: req.user.id }).sort({ createdAt: -1 }).select("-resume -selfDescription -jobDescription -__v -technicalQuestions -behavioralQuestions -skillGaps -preparationPlan")
@@ -96,6 +110,7 @@ async function generateResumePdfController(req, res) {
     res.send(pdfBuffer)
 }
 
+<<<<<<< HEAD
 =======
 const pdfParse = require(""pdf-parse-fork")
 const { generateInterviewReport, generateResumePdf } = require("../services/ai.service")
@@ -196,3 +211,7 @@ async function generateResumePdfController(req, res) {
 
 >>>>>>> 966552f (fixed pdf library for vercel):Backend/src/controllers/interview.controller.js
 module.exports = { generateInterViewReportController, getInterviewReportByIdController, getAllInterviewReportsController, generateResumePdfController }
+=======
+module.exports = { generateInterViewReportController, getInterviewReportByIdController, getAllInterviewReportsController, generateResumePdfController }     
+
+>>>>>>> d4f8b9ef35f6d0ab732b450a2a0e4c4f4b3dec04

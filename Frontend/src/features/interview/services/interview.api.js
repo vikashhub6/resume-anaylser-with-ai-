@@ -1,7 +1,11 @@
 import axios from "axios";
 
 const api = axios.create({
+<<<<<<< HEAD
     baseURL: "https://resume-anaylser-with-ai.onrender.com",
+=======
+    baseURL: "http://localhost:3000",
+>>>>>>> d4f8b9ef35f6d0ab732b450a2a0e4c4f4b3dec04
     withCredentials: true,
 })
 
