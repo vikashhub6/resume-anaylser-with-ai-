@@ -1,4 +1,4 @@
-const pdfParse = require(""pdf-parse-fork")
+const pdfParse = require("pdf-parse-fork")
 const { generateInterviewReport, generateResumePdf } = require("../services/ai.service")
 const interviewReportModel = require("../models/interviewReport.model")
 
@@ -10,7 +10,10 @@ const interviewReportModel = require("../models/interviewReport.model")
  */
 async function generateInterViewReportController(req, res) {
 
-    const resumeContent = await (new pdfParse.PDFParse(Uint8Array.from(req.file.buffer))).getText()
+    // Is line ko maine fork ke function-based syntax ke liye fix kiya hai
+    const resumeData = await pdfParse(req.file.buffer)
+    const resumeContent = { text: resumeData.text } 
+    
     const { selfDescription, jobDescription } = req.body
 
     const interViewReportByAi = await generateInterviewReport({
@@ -56,8 +59,7 @@ async function getInterviewReportByIdController(req, res) {
 }
 
 
-/** 
- * @description Controller to get all interview reports of logged in user.
+/** * @description Controller to get all interview reports of logged in user.
  */
 async function getAllInterviewReportsController(req, res) {
     const interviewReports = await interviewReportModel.find({ user: req.user.id }).sort({ createdAt: -1 }).select("-resume -selfDescription -jobDescription -__v -technicalQuestions -behavioralQuestions -skillGaps -preparationPlan")
