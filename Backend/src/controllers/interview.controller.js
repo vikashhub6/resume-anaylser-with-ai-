@@ -1,4 +1,5 @@
 const pdfParse = require("pdf-parse-fork");
+const axios = require("axios");
 const { generateInterviewReport, generateResumePdf } = require("../services/ai.service");
 const interviewReportModel = require("../models/interviewReport.model");
 
@@ -6,14 +7,19 @@ const interviewReportModel = require("../models/interviewReport.model");
  * @description Controller to generate interview report based on user self description, resume and job description.
  */
 async function generateInterViewReportController(req, res) {
-  const resumeContent = await pdfParse(req.file.buffer); // ✅ FIXED
-  const { selfDescription, jobDescription } = req.body;
+  const response = await axios.get(req.file.path, { 
+      responseType: "arraybuffer" 
+  })
+  
+  const resumeContent = await pdfParse(response.data)
+  
+  const { selfDescription, jobDescription } = req.body
 
   const interViewReportByAi = await generateInterviewReport({
     resume: resumeContent.text,
     selfDescription,
     jobDescription,
-  });
+  })
 
   const interviewReport = await interviewReportModel.create({
     user: req.user.id,
@@ -21,12 +27,12 @@ async function generateInterViewReportController(req, res) {
     selfDescription,
     jobDescription,
     ...interViewReportByAi,
-  });
+  })
 
   res.status(201).json({
     message: "Interview report generated successfully.",
     interviewReport,
-  });
+  })
 }
 
 /**
