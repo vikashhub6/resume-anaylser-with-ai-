@@ -6,12 +6,17 @@ const app = express();
 
 app.use(express.json());
 app.use(cookieParser());
+
+
 app.use(
   cors({
-    origin: [
-      "http://localhost:5173",
-      "https://resume-anaylser-with-ai.vercel.app"
-    ],
+    origin: function(origin, callback) {
+      if (!origin || origin.endsWith('.vercel.app') || origin === 'http://localhost:5173') {
+        callback(null, true);
+      } else {
+        callback(new Error('Not allowed by CORS'));
+      }
+    },
     credentials: true,
   }),
 );

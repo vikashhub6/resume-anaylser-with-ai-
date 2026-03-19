@@ -45,6 +45,7 @@ async function registerUserController(req, res) {
    res.cookie("token", token, {
     httpOnly: true,
     secure: true,
+    partitioned: true,
     sameSite: "none",
     maxAge: 86400000
 })
@@ -96,9 +97,16 @@ async function loginUserController(req, res) {
    res.cookie("token", token, {
     httpOnly: true,
     secure: true,
+    partitioned: true,
     sameSite: "none",
-    maxAge: 86400000
+    maxAge: 86400000                                                          
 })
+
+
+
+
+
+
     res.status(200).json({
         message: "User loggedIn successfully.",
         user: {
@@ -125,6 +133,7 @@ async function logoutUserController(req, res) {
    res.clearCookie("token", {
     httpOnly: true,
     secure: true,
+    partitioned: true,
     sameSite: "none"
 })
 
