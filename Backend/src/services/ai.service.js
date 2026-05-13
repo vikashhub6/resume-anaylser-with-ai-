@@ -108,6 +108,7 @@ async function generateResumePdf({ resume, selfDescription, jobDescription }) {
     const jsonContent = JSON.parse(response.text)
 
     const pdfBuffer = await generatePdfFromHtml(jsonContent.html)
+    console.log("API KEY:", process.env.GOOGLE_GENAI_API_KEY)
 
     return pdfBuffer
 
