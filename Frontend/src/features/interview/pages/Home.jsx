@@ -18,6 +18,7 @@ const Home = () => {
       selfDescription,
       resumeFile,
     });
+    if (!data) return
     navigate(`/interview/${data._id}`);
   };
 
