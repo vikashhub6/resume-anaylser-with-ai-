@@ -10,7 +10,8 @@ export async function register({ username, email, password }) {
         })
         return response.data
     } catch (err) {
-        console.log(err)
+        console.error('Registration error:', err.response?.data || err.message)
+        return { error: err.response?.data?.message || 'Registration failed' }
     }
 }
 export async function login({ email, password }) {
@@ -20,7 +21,8 @@ export async function login({ email, password }) {
         })
         return response.data
     } catch (err) {
-        console.log(err)
+        console.error('Login error:', err.response?.data || err.message)
+        return { error: err.response?.data?.message || 'Login failed' }
     }
 }
 export async function logout() {
